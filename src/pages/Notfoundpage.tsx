@@ -20,4 +20,4 @@ class Notfound extends React.Component {
 //   );
 // }
 
-export { Notfound };
+export default Notfound;

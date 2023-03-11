@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import { About } from '../pages/Aboutus';
-import { Notfound } from '../pages/Notfoundpage';
+import About from '../pages/Aboutus';
+import Notfound from '../pages/Notfoundpage';
 import { Main } from '../pages/Main';
 class Header extends React.Component {
   render() {

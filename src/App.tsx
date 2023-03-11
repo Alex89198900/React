@@ -1,11 +1,14 @@
 import './App.scss';
 import React from 'react';
 import Header from './components/Header';
+import { HashRouter } from 'react-router-dom';
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <HashRouter>
+          <Header />
+        </HashRouter>
       </div>
     );
   }
