@@ -10,14 +10,4 @@ class Notfound extends React.Component {
   }
 }
 
-// function Notfound() {
-//   const error = useRouteError();
-//   console.error(error);
-//   return (
-//     <div className="App">
-//       <h1> Ops 404</h1>
-//     </div>
-//   );
-// }
-
 export default Notfound;

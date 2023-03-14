@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
 import Header from '../components/Header';
 
-describe('renders learn react link', () => {
+describe('Header', () => {
   it('Renders header', () => {
     render(<App />);
   });

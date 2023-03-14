@@ -11,12 +11,12 @@ class Cards extends React.Component {
           <div>{el.brand}</div>
           <div>{el.category}</div>
         </div>
-        <div>{el.description}</div>
-        <div>{el.price}</div>
+        <div className="desc">{el.description}</div>
+        <div className="price">Price:{el.price}$</div>
       </li>
     ));
     return (
-      <main>
+      <main className="main">
         <ul className="list-cards">{listItems}</ul>
       </main>
     );
