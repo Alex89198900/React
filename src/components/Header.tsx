@@ -1,21 +1,21 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import About from '../pages/Aboutus';
-import Notfound from '../pages/Notfoundpage';
-import Main from '../pages/Main';
-class Header extends React.Component {
+import { Link } from 'react-router-dom';
+
+type page = {
+  title: string;
+};
+class Header extends React.Component<page> {
+  constructor(props: page) {
+    super(props);
+  }
   render() {
     return (
-      <div>
+      <div className="about">
         <header className="header">
-          <Link to="/">Home</Link>
+          <span className="title-header">Page: {this.props.title}</span>
+          <Link to="/">Main</Link>
           <Link to="/about">About Us</Link>
         </header>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Notfound />} />
-        </Routes>
       </div>
     );
   }

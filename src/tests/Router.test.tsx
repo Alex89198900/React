@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
-import Header from '../components/Header';
+import Routeses from '../components/Router';
 
 describe('Header', () => {
   it('Renders header', () => {
@@ -11,7 +11,7 @@ describe('Header', () => {
   it('Route about', () => {
     render(
       <MemoryRouter initialEntries={['/about']}>
-        <Header />
+        <Routeses />
       </MemoryRouter>
     );
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('About page');
@@ -19,7 +19,7 @@ describe('Header', () => {
   it('Route not found', () => {
     render(
       <MemoryRouter initialEntries={['/jjjjfjfj']}>
-        <Header />
+        <Routeses />
       </MemoryRouter>
     );
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('ops 404');
