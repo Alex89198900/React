@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "test": "vitest run --coverage"
+    "test": "vitest run --coverage",
+    "check-types": "tsc --noEmit",
+    "eslint": "eslint . --ext .tsx --ext .ts",
+    "lint": "npm run check-types && npm run eslint",
+    "make:redirects": "echo /* /index.html 200 > dist/_redirects"
   },
   "dependencies": {
     "react": "^18.2.0",
