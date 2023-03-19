@@ -4,7 +4,7 @@ import List from '../components/List';
 import React from 'react';
 
 describe('Aboutus', () => {
-  it('Renders hello', () => {
+  it('Renders List', () => {
     render(<List />);
   });
 });

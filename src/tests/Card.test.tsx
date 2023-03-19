@@ -5,7 +5,7 @@ import React from 'react';
 import { data } from '../data';
 
 describe('Aboutus', () => {
-  it('Renders hello', () => {
+  it('Renders Card', () => {
     render(<Card num={data[0]} />);
   });
 });
