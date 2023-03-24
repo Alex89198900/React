@@ -15,6 +15,7 @@ class Header extends React.Component<page> {
           <span className="title-header">Page: {this.props.title}</span>
           <Link to="/">Main</Link>
           <Link to="/about">About Us</Link>
+          <Link to="/form">Form</Link>
         </header>
       </div>
     );
