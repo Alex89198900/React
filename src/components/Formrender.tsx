@@ -10,7 +10,7 @@ interface CardForm {
   };
 }
 
-class FormRender extends React.Component<CardForm> {
+class Formrender extends React.Component<CardForm> {
   constructor(props: CardForm) {
     super(props);
   }
@@ -26,4 +26,4 @@ class FormRender extends React.Component<CardForm> {
   }
 }
 
-export default FormRender;
+export default Formrender;

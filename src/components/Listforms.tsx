@@ -1,6 +1,6 @@
 import React from 'react';
-import { CustomElementType } from './Form';
-import FormRender from './Formrender';
+import { CustomElementType } from '../pages/Form';
+import Formrender from './Formrender';
 
 interface CardForm {
   elem: {
@@ -8,7 +8,7 @@ interface CardForm {
   };
 }
 
-class ListFormRender extends React.Component<CardForm> {
+class Listform extends React.Component<CardForm> {
   constructor(props: CardForm) {
     super(props);
   }
@@ -16,7 +16,7 @@ class ListFormRender extends React.Component<CardForm> {
     console.log(this.props.elem.arr);
     const listItems = this.props.elem.arr.map((el: CustomElementType) => (
       <li key={el.id} className="iuuuu">
-        <FormRender num={el} />
+        <Formrender num={el} />
       </li>
     ));
     return (
@@ -27,4 +27,4 @@ class ListFormRender extends React.Component<CardForm> {
   }
 }
 
-export default ListFormRender;
+export default Listform;

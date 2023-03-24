@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react';
-import ListFormRender from './Listformrender';
+import Listform from '../components/Listforms';
 interface CustomElements extends HTMLFormControlsCollection {
   photo: HTMLInputElement;
   name: HTMLInputElement;
@@ -163,7 +163,7 @@ class Form extends React.Component {
           </form>
         </div>
         <div className="lalalalall">
-          <ListFormRender elem={this.elem} />
+          <Listform elem={this.elem} />
         </div>
       </>
     );
