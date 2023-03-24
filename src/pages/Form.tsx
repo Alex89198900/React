@@ -75,6 +75,45 @@ class Form extends React.Component {
       target.date.value = '';
     }
   };
+  validate(data: CustomElementType) {
+    const input = data;
+
+    const errors = {
+      id: '',
+      name: '',
+      photo: '',
+      date: '',
+      conf: '',
+      radio: '',
+    };
+
+    let isValid = true;
+    if (input.photo === '') {
+      isValid = false;
+      errors.photo = 'Please choise your photo.';
+    }
+    if (input.name === '' || input.name.charAt(0).toUpperCase() !== input.name.charAt(0)) {
+      isValid = false;
+      errors.name = 'Please enter your name.';
+    }
+    if (input.date === '') {
+      isValid = false;
+      errors.date = 'Please enter your date.';
+    }
+    if (input.conf === false) {
+      isValid = false;
+      errors.conf = 'Please confirm.';
+    }
+    if (input.radio === '') {
+      isValid = false;
+      errors.radio = 'Please choise.';
+    }
+    this.elem.err = errors;
+    this.setState({
+      err: errors,
+    });
+    return isValid;
+  }
 
   render() {
     return (
