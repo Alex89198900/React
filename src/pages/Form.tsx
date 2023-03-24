@@ -25,6 +25,56 @@ interface CustomForm extends HTMLFormElement {
 
 class Form extends React.Component {
   private arr: Array<CustomElementType> = [];
+  elem = {
+    arr: this.arr,
+    err: {
+      id: '',
+      name: '',
+      photo: '',
+      date: '',
+      conf: '',
+      radio: '',
+    },
+  };
+
+  onSubmit = (event: FormEvent<CustomForm>) => {
+    event.preventDefault();
+    const target = event.currentTarget.elements;
+    const photoFile =
+      target.photo.files?.length !== 0 && target.photo.files
+        ? URL.createObjectURL(target.photo.files[0])
+        : '';
+    let choise = null;
+    if (target.contactChoice1) {
+      choise = target.contactChoice1.value;
+    }
+    if (target.contactChoice2) {
+      choise = target.contactChoice2.value;
+    } else {
+      choise = '';
+    }
+    const data = {
+      id: String(this.arr.length),
+      name: target.name.value,
+      photo: photoFile,
+      date: target.date.value,
+      cars: target.cars.value,
+      conf: target.conf.checked,
+      radio: choise,
+    };
+    console.log(target.contactChoice1.value);
+    if (this.validate(data)) {
+      console.log('suchess');
+      this.arr.push(data);
+      this.setState({
+        arr: this.arr,
+      });
+      target.name.value = '';
+      target.photo.files = null;
+      target.conf.checked = false;
+      target.date.value = '';
+    }
+  };
 
   render() {
     return (
