@@ -15,13 +15,13 @@ class Listform extends React.Component<CardForm> {
   render() {
     console.log(this.props.elem.arr);
     const listItems = this.props.elem.arr.map((el: CustomElementType) => (
-      <li key={el.id} className="iuuuu">
+      <li key={el.id} className="item-form">
         <Formrender num={el} />
       </li>
     ));
     return (
       <main className="main">
-        <ul className="kkkkk">{listItems}</ul>
+        <ul className="list-card-form">{listItems}</ul>
       </main>
     );
   }

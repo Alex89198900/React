@@ -4,6 +4,66 @@
   padding: 30px;
   text-align: center;
 }
+.field {
+  margin-top: 10px;
+}
+
+.message-errr {
+  color: red;
+}
+.all-forms {
+  margin-top: 100px;
+}
+.info-card {
+  width: 100%;
+}
+
+#photo {
+  width: 350px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+}
+.img-card {
+  width: 225px;
+  height: 200px;
+}
+.card-form {
+  margin: 20px;
+  width: 300px;
+  height: 350px;
+  background-color: #778899;
+}
+.item-form {
+  list-style: none;
+}
+#name {
+  width: 320px;
+  text-align: center;
+  height: 20px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+}
+#date {
+  width: 300px;
+  text-align: center;
+  height: 20px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+}
+#cars {
+  width: 180px;
+  text-align: center;
+  height: 20px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+}
+.submit {
+  width: 100px;
+  height: 50px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+}
+
 .app {
   width: 100%;
 }
@@ -32,8 +92,11 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
 }
-.price {
+.list-card-form {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .img-card {
@@ -49,8 +112,6 @@
 }
 .desc {
   height: 23%;
-}
-.container-info-one {
 }
 
 form.catalin {

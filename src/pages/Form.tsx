@@ -1,10 +1,11 @@
 import React, { FormEvent } from 'react';
 import Listform from '../components/Listforms';
+import Header from '../components/Header';
 interface CustomElements extends HTMLFormControlsCollection {
   photo: HTMLInputElement;
   name: HTMLInputElement;
   date: HTMLInputElement;
-  cars: HTMLSelectElement;
+  frame: HTMLSelectElement;
   conf: HTMLInputElement;
   contactChoice1: HTMLInputElement;
   contactChoice2: HTMLInputElement;
@@ -14,7 +15,7 @@ export interface CustomElementType {
   name: string;
   photo: string;
   date: string;
-  cars: string;
+  frame: string;
   conf: boolean;
   radio: string;
 }
@@ -34,6 +35,7 @@ class Form extends React.Component {
       date: '',
       conf: '',
       radio: '',
+      frame: '',
     },
   };
 
@@ -44,27 +46,22 @@ class Form extends React.Component {
       target.photo.files?.length !== 0 && target.photo.files
         ? URL.createObjectURL(target.photo.files[0])
         : '';
-    let choise = null;
-    if (target.contactChoice1) {
-      choise = target.contactChoice1.value;
-    }
-    if (target.contactChoice2) {
-      choise = target.contactChoice2.value;
-    } else {
-      choise = '';
-    }
+    const choise = target.contactChoice1.checked
+      ? target.contactChoice1.value
+      : target.contactChoice2.checked
+      ? target.contactChoice2.value
+      : '';
     const data = {
       id: String(this.arr.length),
       name: target.name.value,
       photo: photoFile,
       date: target.date.value,
-      cars: target.cars.value,
+      frame: target.frame.value,
       conf: target.conf.checked,
       radio: choise,
     };
-    console.log(target.contactChoice1.value);
+    console.log(choise);
     if (this.validate(data)) {
-      console.log('suchess');
       this.arr.push(data);
       this.setState({
         arr: this.arr,
@@ -73,6 +70,10 @@ class Form extends React.Component {
       target.photo.files = null;
       target.conf.checked = false;
       target.date.value = '';
+      target.frame.value = '';
+      target.contactChoice1.checked = false;
+      target.contactChoice2.checked = false;
+      alert('CARD CRETED');
     }
   };
   validate(data: CustomElementType) {
@@ -85,6 +86,7 @@ class Form extends React.Component {
       date: '',
       conf: '',
       radio: '',
+      frame: '',
     };
 
     let isValid = true;
@@ -106,7 +108,11 @@ class Form extends React.Component {
     }
     if (input.radio === '') {
       isValid = false;
-      errors.radio = 'Please choise.';
+      errors.radio = 'Please choise language.';
+    }
+    if (input.frame === 'DEFAULT') {
+      isValid = false;
+      errors.frame = 'Please choise framework.';
     }
     this.elem.err = errors;
     this.setState({
@@ -118,51 +124,57 @@ class Form extends React.Component {
   render() {
     return (
       <>
-        <div className="about">
+        <Header title="Form" />
+        <div className="all-forms">
           <form className="form" onSubmit={this.onSubmit}>
             <div className="field">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Photo</label>
               <input id="photo" type="file" />
-              <div>{this.elem.err.photo}</div>
+              <div className="message-errr">{this.elem.err.photo}</div>
             </div>
 
             <div className="field">
               <label htmlFor="name">Name</label>
               <input id="name" type="text" />
-              <div>{this.elem.err.name}</div>
+              <div className="message-errr">{this.elem.err.name}</div>
             </div>
             <div className="field">
               <label htmlFor="date">Date</label>
               <input type="date" id="date" />
-              <div>{this.elem.err.date}</div>
+              <div className="message-errr">{this.elem.err.date}</div>
             </div>
             <div className="field">
-              <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+              <label htmlFor="cars">framework</label>
+              <select name="frame" id="cars" defaultValue={'DEFAULT'}>
+                <option value="DEFAULT" hidden></option>
+                <option value="React">React</option>
+                <option value="Angular">Angular</option>
+                <option value="Vue">Vue</option>
+                <option value="Svelte">Svelte</option>
               </select>
+              <div className="message-errr">{this.elem.err.frame}</div>
             </div>
             <div className="field">
               <div>
-                <input type="radio" id="contactChoice1" name="contact" value="email" />
-                <label htmlFor="contactChoice1">Email</label>
-                <input type="radio" id="contactChoice1" name="contact" value="phone" />
-                <label htmlFor="contactChoice2">Phone</label>
-                <div>{this.elem.err.radio}</div>
+                <input type="radio" id="contactChoice1" name="contact" value="Javascript" />
+                <label htmlFor="contactChoice1">Javascript</label>
+                <input type="radio" id="contactChoice2" name="contact" value="Typescript" />
+                <label htmlFor="contactChoice2">Typescript</label>
+                <div className="message-errr">{this.elem.err.radio}</div>
               </div>
             </div>
 
             <div className="field">
-              <input type="checkbox" id="conf" name="conf" />
-              <div>{this.elem.err.conf}</div>
               <label htmlFor="conf">confirm</label>
+              <input type="checkbox" id="conf" name="conf" />
+              <div className="message-errr">{this.elem.err.conf}</div>
             </div>
-            <button type="submit">Sign up</button>
+            <button type="submit" className="submit">
+              Submit
+            </button>
           </form>
         </div>
-        <div className="lalalalall">
+        <div className="list-forms">
           <Listform elem={this.elem} />
         </div>
       </>
