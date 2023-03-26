@@ -11,7 +11,7 @@ describe('Form', () => {
       </HashRouter>
     );
   };
-  test('should accept input', async () => {
+  test('input', async () => {
     setup();
     const input = document.querySelector('#name') as HTMLInputElement | null;
     expect(input).toBeTruthy();
