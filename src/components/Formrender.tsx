@@ -3,10 +3,11 @@ import React from 'react';
 interface CardForm {
   num: {
     id: string;
-    name: string;
+    name: string | undefined;
     photo: string;
-    date: string;
-    frame: string;
+    date: string | undefined;
+    frame: string | undefined;
+    conf: boolean | undefined;
     radio: string;
   };
 }
