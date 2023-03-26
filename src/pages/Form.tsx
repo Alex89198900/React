@@ -1,31 +1,25 @@
 import React, { FormEvent } from 'react';
 import Listform from '../components/Listforms';
 import Header from '../components/Header';
-interface CustomElements extends HTMLFormControlsCollection {
-  photo: HTMLInputElement;
-  name: HTMLInputElement;
-  date: HTMLInputElement;
-  frame: HTMLSelectElement;
-  conf: HTMLInputElement;
-  contactChoice1: HTMLInputElement;
-  contactChoice2: HTMLInputElement;
-}
 export interface CustomElementType {
   id: string;
-  name: string;
+  name: string | undefined;
   photo: string;
-  date: string;
-  frame: string;
-  conf: boolean;
+  date: string | undefined;
+  frame: string | undefined;
+  conf: boolean | undefined;
   radio: string;
-}
-
-interface CustomForm extends HTMLFormElement {
-  readonly elements: CustomElements;
 }
 
 class Form extends React.Component {
   private arr: Array<CustomElementType> = [];
+  name = React.createRef<HTMLInputElement>();
+  photo = React.createRef<HTMLInputElement>();
+  date = React.createRef<HTMLInputElement>();
+  frame = React.createRef<HTMLSelectElement>();
+  conf = React.createRef<HTMLInputElement>();
+  contactChoice1 = React.createRef<HTMLInputElement>();
+  contactChoice2 = React.createRef<HTMLInputElement>();
   elem = {
     arr: this.arr,
     mess: '',
@@ -47,28 +41,32 @@ class Form extends React.Component {
       this.setState({
         mess: '',
       });
-    }, 2000);
+    }, 3000);
   }
 
-  onSubmit = (event: FormEvent<CustomForm>) => {
+  onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const target = event.currentTarget.elements;
+    const name = this.name.current?.value;
+    const date = this.date.current?.value;
+    const frame = this.frame.current?.value;
+    const conf = this.conf.current?.checked;
+
     const photoFile =
-      target.photo.files?.length !== 0 && target.photo.files
-        ? URL.createObjectURL(target.photo.files[0])
+      this.photo.current?.files?.length !== 0 && this.photo.current?.files
+        ? URL.createObjectURL(this.photo.current.files[0])
         : '';
-    const choise = target.contactChoice1.checked
-      ? target.contactChoice1.value
-      : target.contactChoice2.checked
-      ? target.contactChoice2.value
+    const choise = this.contactChoice1.current?.checked
+      ? this.contactChoice1.current?.value
+      : this.contactChoice2.current?.checked
+      ? this.contactChoice2.current?.value
       : '';
     const data = {
       id: String(this.arr.length),
-      name: target.name.value,
+      name: name,
       photo: photoFile,
-      date: target.date.value,
-      frame: target.frame.value,
-      conf: target.conf.checked,
+      date: date,
+      frame: frame,
+      conf: conf,
       radio: choise,
     };
     if (this.validate(data)) {
@@ -77,19 +75,19 @@ class Form extends React.Component {
       this.setState({
         arr: this.arr,
       });
-      target.name.value = '';
-      target.photo.files = null;
-      target.conf.checked = false;
-      target.date.value = '';
-      target.frame.value = '';
-      target.contactChoice1.checked = false;
-      target.contactChoice2.checked = false;
-      this.showMessage();
+      this.name.current ? (this.name.current.value = '') : '';
+      this.frame.current ? (this.frame.current.value = '') : '';
+      this.date.current ? (this.date.current.value = '') : '';
+      this.conf.current ? (this.conf.current.checked = false) : false;
+      this.contactChoice1.current ? (this.contactChoice1.current.checked = false) : false;
+      this.contactChoice2.current ? (this.contactChoice2.current.checked = false) : false;
+      this.photo.current ? (this.photo.current.value = '') : '';
     }
   };
+
   validate(data: CustomElementType) {
     const input = data;
-
+    const name = data.name ?? '';
     const errors = {
       id: '',
       name: '',
@@ -99,17 +97,12 @@ class Form extends React.Component {
       radio: '',
       frame: '',
     };
-
     let isValid = true;
     if (input.photo === '') {
       isValid = false;
       errors.photo = 'Please choise your photo.';
     }
-    if (
-      input.name === '' ||
-      input.name.charAt(0).toUpperCase() !== input.name.charAt(0) ||
-      input.name.length < 2
-    ) {
+    if (name === '' || name.charAt(0).toUpperCase() !== name.charAt(0)) {
       isValid = false;
       errors.name = 'Must start with a capital letter and not change two letters.';
     }
@@ -135,7 +128,6 @@ class Form extends React.Component {
     });
     return isValid;
   }
-
   render() {
     return (
       <>
@@ -145,23 +137,23 @@ class Form extends React.Component {
           <form className="form" onSubmit={this.onSubmit}>
             <div className="field">
               <label htmlFor="name">Photo</label>
-              <input id="photo" type="file" />
+              <input id="photo" type="file" ref={this.photo} />
               <div className="message-errr">{this.elem.err.photo}</div>
             </div>
 
             <div className="field">
               <label htmlFor="name">Name</label>
-              <input id="name" type="text" />
+              <input id="name" type="text" ref={this.name} />
               <div className="message-errr">{this.elem.err.name}</div>
             </div>
             <div className="field">
               <label htmlFor="date">Date</label>
-              <input type="date" id="date" />
+              <input type="date" id="date" ref={this.date} />
               <div className="message-errr">{this.elem.err.date}</div>
             </div>
             <div className="field">
               <label htmlFor="cars">framework</label>
-              <select name="frame" id="cars" defaultValue={'DEFAULT'}>
+              <select ref={this.frame} id="cars" defaultValue={'DEFAULT'}>
                 <option value="DEFAULT" hidden></option>
                 <option value="React">React</option>
                 <option value="Angular">Angular</option>
@@ -172,9 +164,19 @@ class Form extends React.Component {
             </div>
             <div className="field">
               <div>
-                <input type="radio" id="contactChoice1" name="contact" value="Javascript" />
+                <input
+                  type="radio"
+                  id="contactChoice1"
+                  ref={this.contactChoice1}
+                  value="Javascript"
+                />
                 <label htmlFor="contactChoice1">Javascript</label>
-                <input type="radio" id="contactChoice2" name="contact" value="Typescript" />
+                <input
+                  type="radio"
+                  id="contactChoice2"
+                  ref={this.contactChoice1}
+                  value="Typescript"
+                />
                 <label htmlFor="contactChoice2">Typescript</label>
                 <div className="message-errr">{this.elem.err.radio}</div>
               </div>
@@ -182,7 +184,7 @@ class Form extends React.Component {
 
             <div className="field">
               <label htmlFor="conf">confirm</label>
-              <input type="checkbox" id="conf" name="conf" />
+              <input type="checkbox" id="conf" ref={this.conf} />
               <div className="message-errr">{this.elem.err.conf}</div>
             </div>
             <button type="submit" className="submit">
@@ -197,5 +199,4 @@ class Form extends React.Component {
     );
   }
 }
-
 export default Form;
