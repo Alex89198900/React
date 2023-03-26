@@ -103,6 +103,15 @@
   width: 300px;
   height: 200px;
 }
+.message {
+  position: absolute;
+  top: 12%;
+  left: 45%;
+  border-radius: 10px;
+  color: #778899;
+  background-color: rgb(36, 35, 35);
+  font-size: 25px;
+}
 .item-card {
   height: 500px;
   background-color: rgb(175, 172, 172);

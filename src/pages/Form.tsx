@@ -28,6 +28,7 @@ class Form extends React.Component {
   private arr: Array<CustomElementType> = [];
   elem = {
     arr: this.arr,
+    mess: '',
     err: {
       id: '',
       name: '',
@@ -38,6 +39,16 @@ class Form extends React.Component {
       frame: '',
     },
   };
+
+  showMessage() {
+    this.elem.mess = 'CARD CREATED';
+    setTimeout(() => {
+      this.elem.mess = '';
+      this.setState({
+        mess: '',
+      });
+    }, 2000);
+  }
 
   onSubmit = (event: FormEvent<CustomForm>) => {
     event.preventDefault();
@@ -60,8 +71,8 @@ class Form extends React.Component {
       conf: target.conf.checked,
       radio: choise,
     };
-    console.log(choise);
     if (this.validate(data)) {
+      this.showMessage();
       this.arr.push(data);
       this.setState({
         arr: this.arr,
@@ -73,7 +84,7 @@ class Form extends React.Component {
       target.frame.value = '';
       target.contactChoice1.checked = false;
       target.contactChoice2.checked = false;
-      alert('CARD CRETED');
+      this.showMessage();
     }
   };
   validate(data: CustomElementType) {
@@ -94,9 +105,13 @@ class Form extends React.Component {
       isValid = false;
       errors.photo = 'Please choise your photo.';
     }
-    if (input.name === '' || input.name.charAt(0).toUpperCase() !== input.name.charAt(0)) {
+    if (
+      input.name === '' ||
+      input.name.charAt(0).toUpperCase() !== input.name.charAt(0) ||
+      input.name.length < 2
+    ) {
       isValid = false;
-      errors.name = 'Please enter your name.';
+      errors.name = 'Must start with a capital letter and not change two letters.';
     }
     if (input.date === '') {
       isValid = false;
@@ -125,6 +140,7 @@ class Form extends React.Component {
     return (
       <>
         <Header title="Form" />
+        <div className="message">{this.elem.mess}</div>
         <div className="all-forms">
           <form className="form" onSubmit={this.onSubmit}>
             <div className="field">
