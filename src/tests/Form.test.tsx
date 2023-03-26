@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
 import Form from '../pages/Form';
 
-describe('<ProjectForm />', () => {
+describe('Form', () => {
   const setup = () => {
     render(
       <HashRouter>
