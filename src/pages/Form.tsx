@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react';
 import Listform from '../components/Listforms';
 import Header from '../components/Header';
+
 export interface CustomElementType {
   id: string;
   name: string | undefined;
@@ -20,6 +21,7 @@ class Form extends React.Component {
   conf = React.createRef<HTMLInputElement>();
   contactChoice1 = React.createRef<HTMLInputElement>();
   contactChoice2 = React.createRef<HTMLInputElement>();
+  form = React.createRef<HTMLFormElement>();
   elem = {
     arr: this.arr,
     mess: '',
@@ -60,6 +62,7 @@ class Form extends React.Component {
       : this.contactChoice2.current?.checked
       ? this.contactChoice2.current?.value
       : '';
+
     const data = {
       id: String(this.arr.length),
       name: name,
@@ -75,13 +78,7 @@ class Form extends React.Component {
       this.setState({
         arr: this.arr,
       });
-      this.name.current ? (this.name.current.value = '') : '';
-      this.frame.current ? (this.frame.current.value = '') : '';
-      this.date.current ? (this.date.current.value = '') : '';
-      this.conf.current ? (this.conf.current.checked = false) : false;
-      this.contactChoice1.current ? (this.contactChoice1.current.checked = false) : false;
-      this.contactChoice2.current ? (this.contactChoice2.current.checked = false) : false;
-      this.photo.current ? (this.photo.current.value = '') : '';
+      this.form.current?.reset();
     }
   };
 
@@ -134,7 +131,7 @@ class Form extends React.Component {
         <Header title="Form" />
         <div className="message">{this.elem.mess}</div>
         <div className="all-forms">
-          <form className="form" onSubmit={this.onSubmit}>
+          <form className="form" onSubmit={this.onSubmit} ref={this.form}>
             <div className="field">
               <label htmlFor="name">Photo</label>
               <input id="photo" type="file" ref={this.photo} />
