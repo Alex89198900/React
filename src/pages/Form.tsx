@@ -165,6 +165,7 @@ class Form extends React.Component {
             <div className="field">
               <div>
                 <input
+                  name="drone"
                   type="radio"
                   id="contactChoice1"
                   ref={this.contactChoice1}
@@ -172,9 +173,10 @@ class Form extends React.Component {
                 />
                 <label htmlFor="contactChoice1">Javascript</label>
                 <input
+                  name="drone"
                   type="radio"
-                  id="contactChoice2"
-                  ref={this.contactChoice1}
+                  id="contactChoice1"
+                  ref={this.contactChoice2}
                   value="Typescript"
                 />
                 <label htmlFor="contactChoice2">Typescript</label>
