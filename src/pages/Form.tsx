@@ -49,7 +49,7 @@ class Form extends React.Component {
   onSubmit = (event: FormEvent) => {
     event.preventDefault();
     const name = this.name.current?.value;
-    const date = this.date.current?.value;
+    const date = this.date.current?.value.trim();
     const frame = this.frame.current?.value;
     const conf = this.conf.current?.checked;
 
