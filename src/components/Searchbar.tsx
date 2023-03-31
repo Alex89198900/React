@@ -1,28 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-class Searchbar extends React.Component {
-  private res = window.localStorage.getItem('SAVE_SEARCH') ?? '';
-  state = {
-    text: this.res,
-  };
-  componentWillUnmount(): void {
-    window.localStorage.setItem('SAVE_SEARCH', this.res);
-  }
+function Searchbar() {
+  const [name1, setName] = useState<string>(() => {
+    const saved = localStorage.getItem('name');
+    return saved || '';
+  });
 
-  onchange = (e: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ text: e.currentTarget.value });
-    this.res = e.currentTarget.value;
+  useEffect(() => {
+    localStorage.setItem('name', name1);
+  }, [name1]);
+
+  const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setName(e.currentTarget.value);
   };
-  render() {
-    return (
-      <div>
-        <form className="catalin">
-          <input type="text" value={this.state.text} onInput={this.onchange} className="input" />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <form className="catalin">
+        <input type="text" value={name1} onInput={onchange} className="input" name="input" />
+        <button>Send</button>
+      </form>
+    </div>
+  );
 }
 
 export default Searchbar;
