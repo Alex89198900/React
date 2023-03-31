@@ -12,24 +12,19 @@ interface Product {
   };
 }
 
-class Card extends React.Component<Product> {
-  constructor(props: Product) {
-    super(props);
-  }
-  render() {
-    return (
-      <>
-        <img src={`${this.props.num.thumbnail}`} className="img-card"></img>
-        <h3 className="title-card">{this.props.num.title}</h3>
-        <div className="container-info-one">
-          <div>{this.props.num.brand}</div>
-          <div>{this.props.num.category}</div>
-        </div>
-        <div className="desc">{this.props.num.description}</div>
-        <div className="price">Price:{this.props.num.price}$</div>
-      </>
-    );
-  }
+function Card(props: Product) {
+  return (
+    <>
+      <img src={`${props.num.thumbnail}`} className="img-card"></img>
+      <h3 className="title-card">{props.num.title}</h3>
+      <div className="container-info-one">
+        <div>{props.num.brand}</div>
+        <div>{props.num.category}</div>
+      </div>
+      <div className="desc">{props.num.description}</div>
+      <div className="price">Price:{props.num.price}$</div>
+    </>
+  );
 }
 
 export default Card;
