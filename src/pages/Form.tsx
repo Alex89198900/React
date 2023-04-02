@@ -20,7 +20,6 @@ export interface CustomElementType {
   conf: boolean | undefined;
   radio: string;
 }
-let mess = '';
 const arrCards: CustomElementType[] = [];
 const preparationArr = (data: FieldValues): CustomElementType[] => {
   const photoFile =
@@ -35,13 +34,12 @@ const preparationArr = (data: FieldValues): CustomElementType[] => {
     radio: data.contactChoice,
   };
   arrCards.push(dataCard);
-  showMessage();
   return arrCards;
 };
-function showMessage() {
-  mess = 'CARD CREATED';
+function showMessage(callback: (arg: string) => void) {
+  callback('CARD CREATED');
   setTimeout(() => {
-    mess = '';
+    callback('');
   }, 3000);
 }
 
@@ -49,14 +47,19 @@ function Form() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormInputs>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
   const [arr, setCards] = React.useState<CustomElementType[]>([]);
+  const [mess, setMess] = React.useState('');
+
   const onSubmit = (data: FieldValues): void => {
     setCards(preparationArr(data));
+    showMessage(setMess);
+    reset();
   };
   return (
     <>

@@ -22,8 +22,9 @@ export function MyInputFile(props: ComponentPropsd) {
         id="photo"
         type="file"
         {...props.register('photo', {
-          required: 'Please Choise Image',
+          required: 'Choise photo',
         })}
+        accept="image/*"
       />
       <div className="message-errr">{props.errors.photo?.message}</div>
     </div>
@@ -33,7 +34,18 @@ export function MyInputText(props: ComponentPropsd) {
   return (
     <div className="field">
       <label htmlFor="name">Name</label>
-      <input type="text" {...props.register('name')} id="name" />
+      <input
+        type="text"
+        {...props.register('name', {
+          required: 'Please Enter Name',
+          pattern: {
+            value: /^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$/,
+            message: 'Please Enter A Valid Name!',
+          },
+        })}
+        id="name"
+      />
+      <div className="message-errr">{props.errors.name?.message}</div>
     </div>
   );
 }
@@ -57,7 +69,7 @@ export function MySelect(props: ComponentPropsd) {
     <div className="field">
       <label htmlFor="cars">framework</label>
       <select {...props.register('frame', { required: 'Please Choise framework' })} id="cars">
-        <option value="DEFAULT" hidden></option>
+        <option value="" hidden></option>
         <option value="React">React</option>
         <option value="Angular">Angular</option>
         <option value="Vue">Vue</option>
