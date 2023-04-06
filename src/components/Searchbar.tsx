@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function Searchbar() {
   const [name1, setName] = useState<string>(() => {
@@ -6,9 +6,17 @@ function Searchbar() {
     return saved || '';
   });
 
+  const inputRef = useRef<HTMLInputElement>(null!);
+
   useEffect(() => {
-    localStorage.setItem('name', name1);
-  }, [name1]);
+    //inputRef.current.focus();
+    console.log(inputRef.current);
+    // return () => {
+    //   const val = JSON.stringify(valueR.cur!.value);
+    //   setName(val);
+    //   localStorage.setItem('name', val);
+    // };
+  }, []);
 
   const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
     setName(e.currentTarget.value);
@@ -16,10 +24,15 @@ function Searchbar() {
 
   return (
     <div>
-      <form className="catalin">
-        <input type="text" value={name1} onInput={onchange} className="input" name="input" />
-        <button>Send</button>
-      </form>
+      <input
+        type="text"
+        value={name1}
+        // onMoun={onchange}
+        className="input"
+        name="input"
+        ref={inputRef}
+      />
+      <button>Send</button>
     </div>
   );
 }
