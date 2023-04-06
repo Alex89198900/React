@@ -1,9 +1,14 @@
 import React from 'react';
-import { data } from '../data';
 import Card from './Card';
-function List() {
-  const listItems = data.map((el) => (
-    <li key={el.id.toString()} className="item-card">
+import { CardType } from '../model';
+
+interface CardForm {
+  elem: Array<CardType>;
+}
+function List(props: CardForm) {
+  console.log(props);
+  const listItems = props.elem.map((el: CardType) => (
+    <li key={el.id} className="item-card">
       <Card num={el} />
     </li>
   ));

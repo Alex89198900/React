@@ -98,6 +98,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+.modal {
+  position: absolute;
+  background-color: #667788;
+}
 
 .img-card {
   width: 300px;
