@@ -4,6 +4,7 @@ import List from '../components/List';
 import Header from '../components/Header';
 import { setData } from '../model';
 import { FieldValues, useForm } from 'react-hook-form';
+import Sppiner from '../components/Spinner';
 type FormInputs = {
   input?: string;
 };
@@ -45,6 +46,7 @@ function Main() {
         </button>
       </form>
       <List elem={arr} />
+      {arr.length === 0 && <Sppiner />}
     </div>
   );
 }

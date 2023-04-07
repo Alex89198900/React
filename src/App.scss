@@ -7,6 +7,9 @@
 .field {
   margin-top: 10px;
 }
+.container-modal {
+  position: absolute;
+}
 
 .message-errr {
   color: red;
@@ -200,4 +203,25 @@ form.catalin input:-ms-input-placeholder {
   color: #999;
   font-weight: normal;
   font-style: italic;
+}
+///////////////////////////////////////////////////////////////////////////////////////
+.spinner {
+  height: 50px;
+  width: 50px;
+  border-left: 3px solid greenyellow;
+  border-bottom: 3px solid greenyellow;
+  border-right: 3px solid greenyellow;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

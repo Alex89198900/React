@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CardType } from '../model';
 
 interface ModalType {
