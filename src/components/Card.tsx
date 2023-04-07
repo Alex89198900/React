@@ -40,11 +40,17 @@ function Card(props: Product) {
   useOnClickOutside(ref, handleClickOutside);
 
   const buttonClick = num[0] ? 'knopka' : '';
+  const className = num[0] ? 'modal-active' : '';
   return (
-    <div ref={ref} onClick={handleClickInside}>
+    <div>
+      <div className={className}></div>
       <div onClick={modalOff}>{buttonClick}</div>
-      <div className="block-card">
-        <Modal elem1={num} />
+      <div className="block-card" ref={ref} onClick={handleClickInside}>
+        <div>
+          <div ref={ref} onClick={handleClickInside}>
+            <Modal elem1={num} />
+          </div>
+        </div>
         {num.length === 0 && paramSpin === true && <Sppiner />}
         <div>
           <img src={`${props.num.thumbnail}`} className="img-card"></img>

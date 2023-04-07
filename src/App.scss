@@ -7,8 +7,21 @@
 .field {
   margin-top: 10px;
 }
-.container-modal {
-  position: absolute;
+.modal-active {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #778899;
+  z-index: 3;
+}
+.modal-guts {
+  position: fixed;
+  top: 10%;
+  left: 30%;
+  z-index: 5;
+  background-color: gray;
 }
 
 .message-errr {

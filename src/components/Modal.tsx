@@ -5,10 +5,11 @@ import { CardType } from '../model';
 interface ModalType {
   elem1: Array<CardType>;
 }
+
 function Modal(props: ModalType) {
   const price = props.elem1[0] ? 'Prise:' + props.elem1[0]?.price : '';
   return (
-    <div className="modal">
+    <div className="modal-guts">
       <img src={props.elem1[0]?.thumbnail} className="img-modal"></img>
       <h3 className="title-modal">{props.elem1[0]?.title}</h3>
       <div className="container-info-modal">

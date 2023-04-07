@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch';
+
 export interface CardType {
   id: number;
   title: string;
