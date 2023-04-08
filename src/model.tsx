@@ -14,7 +14,7 @@ export interface CardType {
   images: string[];
 }
 
-async function getData(param = '') {
+export async function getData(param = '') {
   const response = await fetch(`https://dummyjson.com/products/${param}`);
   const data = await response.json();
   return data;
@@ -34,14 +34,14 @@ export async function setStupidData(
 }
 export async function filterData(cof: string) {
   const arrProd = await getData();
+  const arrrrr = arrProd.products ?? [];
   let hostPar = '`search?q=smartphones`';
-  arrProd.products.forEach((el: CardType) => {
+  arrrrr.forEach((el: CardType) => {
     if (el.category.toLocaleLowerCase() === cof.toLocaleLowerCase()) {
       hostPar = `category/${cof.toLocaleLowerCase()}`;
     } else if (el.title.toLocaleLowerCase().includes(cof.toLocaleLowerCase())) {
       hostPar = `search?q=${cof.toLocaleLowerCase()}`;
     }
   });
-  console.log(hostPar);
   return hostPar;
 }

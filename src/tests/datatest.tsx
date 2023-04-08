@@ -1,8 +1,4 @@
-//import { CardForm } from 'components/List';
 import { CardType } from 'model';
-interface CardForm {
-  elem: CardType[];
-}
 
 export const cardTest: CardType = {
   id: 1,
