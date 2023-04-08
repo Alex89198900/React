@@ -12,6 +12,7 @@ type FormInputs = {
 function Main() {
   const [arr, setCards] = React.useState<CardType[]>([]);
   const [paramFil, setparamFil] = React.useState('');
+  const [flagFind, setflagFind] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -27,7 +28,11 @@ function Main() {
   };
 
   useEffect(() => {
-    setData(setCards, paramFil);
+    async function fetchData() {
+      await setData(setCards, paramFil);
+      setflagFind(true);
+    }
+    fetchData();
   }, [paramFil]);
 
   return (
@@ -37,7 +42,7 @@ function Main() {
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
         <input
           type="text"
-          {...register('input', { required: 'Please Enter Name' })}
+          {...register('input', { required: 'Please Enter Na' })}
           className="input"
           placeholder="search by category and name product"
         />
@@ -45,8 +50,8 @@ function Main() {
           Submit
         </button>
       </form>
-      <List elem={arr} />
-      {arr.length === 0 && <Sppiner />}
+      <List elem={arr} find={flagFind} />
+      {arr.length === 0 && flagFind === false && <Sppiner />}
     </div>
   );
 }

@@ -42,7 +42,7 @@ function Card(props: Product) {
   const buttonClick = num[0] ? 'knopka' : '';
   const className = num[0] ? 'modal-active' : '';
   return (
-    <div>
+    <div className="block-container">
       <div className={className}></div>
       <div onClick={modalOff}>{buttonClick}</div>
       <div className="block-card" ref={ref} onClick={handleClickInside}>

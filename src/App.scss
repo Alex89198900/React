@@ -7,21 +7,32 @@
 .field {
   margin-top: 10px;
 }
+.block-card {
+  height: 100%;
+}
+.block-container {
+  height: 100%;
+}
 .modal-active {
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: #778899;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 3;
+}
+.img-modal {
+  width: 400px;
 }
 .modal-guts {
   position: fixed;
-  top: 10%;
-  left: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: gray;
 }
 
 .message-errr {
