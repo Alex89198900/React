@@ -39,12 +39,14 @@ function Card(props: Product) {
 
   useOnClickOutside(ref, handleClickOutside);
 
-  const buttonClick = num[0] ? 'knopka' : '';
+  const buttonClick = num[0] ? 'X' : '';
   const className = num[0] ? 'modal-active' : '';
   return (
     <div className="block-container">
       <div className={className}></div>
-      <div onClick={modalOff}>{buttonClick}</div>
+      <div onClick={modalOff} className="btn-off">
+        {buttonClick}
+      </div>
       <div className="block-card" ref={ref} onClick={handleClickInside}>
         <div>
           <div ref={ref} onClick={handleClickInside}>
@@ -55,11 +57,6 @@ function Card(props: Product) {
         <div>
           <img src={`${props.num.thumbnail}`} className="img-card"></img>
           <h3 className="title-card">{props.num.title}</h3>
-          <div className="container-info-one">
-            <div>{props.num.brand}</div>
-            <div>{props.num.category}</div>
-          </div>
-          <div className="desc">{props.num.description}</div>
           <div className="price">Price:{props.num.price}$</div>
         </div>
       </div>

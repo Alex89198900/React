@@ -28,6 +28,7 @@ function Main() {
   };
 
   useEffect(() => {
+    setflagFind(false);
     async function fetchData() {
       await setData(setCards, paramFil);
       setflagFind(true);
@@ -39,6 +40,7 @@ function Main() {
     <div className="main">
       <h1>Main</h1>
       <Header title="Main" />
+      {flagFind === false && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
         <input
           type="text"
@@ -51,7 +53,6 @@ function Main() {
         </button>
       </form>
       <List elem={arr} find={flagFind} />
-      {arr.length === 0 && flagFind === false && <Sppiner />}
     </div>
   );
 }

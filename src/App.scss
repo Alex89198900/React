@@ -7,6 +7,36 @@
 .field {
   margin-top: 10px;
 }
+.btn-off {
+  position: absolute;
+  top: 5%;
+  right: 30%;
+  font-size: 40px;
+  color: red;
+}
+.desc-modal {
+  padding: 5px;
+}
+.block-modal-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.list-img {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+}
+.img-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
 .block-card {
   height: 100%;
 }
@@ -27,7 +57,12 @@
 .img-modal {
   width: 400px;
 }
+.img-con {
+  display: flex;
+  justify-content: center;
+}
 .modal-guts {
+  padding: 0;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -144,7 +179,7 @@
   font-size: 25px;
 }
 .item-card {
-  height: 500px;
+  height: 370px;
   background-color: rgb(175, 172, 172);
   margin: 20px;
   width: 300px;
@@ -230,12 +265,13 @@ form.catalin input:-ms-input-placeholder {
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 .spinner {
+  margin-left: 100px;
   height: 50px;
   width: 50px;
-  border-left: 3px solid greenyellow;
-  border-bottom: 3px solid greenyellow;
-  border-right: 3px solid greenyellow;
-  border-top: 3px solid transparent;
+  border-left: 7px solid rgb(8, 15, 154);
+  border-bottom: 7px solid greenyellow;
+  border-right: 7px solid rgb(161, 5, 31);
+  border-top: 7px solid transparent;
   border-radius: 50%;
   animation: spinner 1s linear infinite;
 }
