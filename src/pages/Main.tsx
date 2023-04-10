@@ -13,6 +13,17 @@ function Main() {
   const [arr, setCards] = React.useState<CardType[]>([]);
   const [paramFil, setparamFil] = React.useState('');
   const [flagFind, setflagFind] = React.useState(false);
+  const [name1, setName] = React.useState<string>(() => {
+    const saved = localStorage.getItem('name');
+    return saved || '';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('name', name1);
+  }, [name1]);
+  const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
+    setName(e.currentTarget.value);
+  };
   const {
     register,
     handleSubmit,
@@ -24,6 +35,7 @@ function Main() {
   });
   const onSubmit = (data: FieldValues): void => {
     setparamFil(data.input);
+    setName('');
     reset();
   };
 
@@ -43,8 +55,10 @@ function Main() {
       {flagFind === false && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
         <input
+          value={name1}
           type="text"
-          {...register('input', { required: 'Please Enter Na' })}
+          onInput={onchange}
+          {...register('input')}
           className="input"
           placeholder="search by category and name product"
         />
