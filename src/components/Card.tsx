@@ -20,21 +20,21 @@ export interface Product {
 }
 function Card(props: Product) {
   const [num, setNum] = React.useState<CardType[]>([]);
-  const [paramSpin, setparamSpin] = React.useState(false);
+  const [paramSpin, setParamSpin] = React.useState(false);
   const idToModal = String(props.num.id);
   const ref = useRef(null);
   function modalOff() {
     setNum([]);
-    setparamSpin(false);
+    setParamSpin(false);
   }
   const handleClickOutside = () => {
     setNum([]);
-    setparamSpin(false);
+    setParamSpin(false);
   };
 
   const handleClickInside = () => {
     setStupidData(setNum, idToModal);
-    setparamSpin(true);
+    setParamSpin(true);
   };
 
   useOnClickOutside(ref, handleClickOutside);

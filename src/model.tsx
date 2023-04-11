@@ -34,9 +34,9 @@ export async function setStupidData(
 }
 export async function filterData(cof: string) {
   const arrProd = await getData();
-  const arrrrr = arrProd.products ?? [];
+  const arrProdCheck = arrProd.products ?? [];
   let hostPar = 'search?q=smartphones565656566565656';
-  arrrrr.forEach((el: CardType) => {
+  arrProdCheck.forEach((el: CardType) => {
     if (el.category.toLocaleLowerCase() === cof.toLocaleLowerCase()) {
       hostPar = `category/${cof.toLocaleLowerCase()}`;
     } else if (el.title.toLocaleLowerCase().includes(cof.toLocaleLowerCase())) {
