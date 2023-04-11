@@ -1,0 +1,67 @@
+import React, { useRef } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
+import Modal from './Modal';
+import { CardType, setStupidData } from '../model';
+import Sppiner from './Spinner';
+export interface Product {
+  num: {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: string[];
+  };
+}
+function Card(props: Product) {
+  const [num, setNum] = React.useState<CardType[]>([]);
+  const [paramSpin, setParamSpin] = React.useState(false);
+  const idToModal = String(props.num.id);
+  const ref = useRef(null);
+  function modalOff() {
+    setNum([]);
+    setParamSpin(false);
+  }
+  const handleClickOutside = () => {
+    setNum([]);
+    setParamSpin(false);
+  };
+
+  const handleClickInside = () => {
+    setStupidData(setNum, idToModal);
+    setParamSpin(true);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
+  const buttonClick = num[0] ? 'X' : '';
+  const className = num[0] ? 'modal-active' : '';
+  return (
+    <div className="block-container">
+      <div className={className}></div>
+      <div onClick={modalOff} className="btn-off">
+        {buttonClick}
+      </div>
+      <div className="block-card" ref={ref} onClick={handleClickInside}>
+        <div>
+          <div ref={ref} onClick={handleClickInside}>
+            <Modal elem1={num} />
+          </div>
+        </div>
+        {num.length === 0 && paramSpin === true && <Sppiner />}
+        <div>
+          <img src={`${props.num.thumbnail}`} className="img-card"></img>
+          <h3 className="title-card">{props.num.title}</h3>
+          <div className="price">Price:{props.num.price}$</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Card;
