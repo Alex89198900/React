@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import { setData } from '../model';
 import { FieldValues, useForm } from 'react-hook-form';
 import Sppiner from '../components/Spinner';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { incrementByAmount } from '../store/redusers/searchreduser';
 type FormInputs = {
   input?: string;
 };
@@ -13,6 +15,8 @@ function Main() {
   const [arr, setCards] = React.useState<CardType[]>([]);
   const [paramFil, setparamFil] = React.useState('');
   const [flagFind, setflagFind] = React.useState(false);
+  const dataInput = useAppSelector((state) => state.input.value);
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -36,6 +40,10 @@ function Main() {
     fetchData();
   }, [paramFil]);
 
+  const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
+    dispatch(incrementByAmount(e.currentTarget.value));
+  };
+
   return (
     <div className="main">
       <h1>Main</h1>
@@ -43,6 +51,8 @@ function Main() {
       {flagFind === false && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
         <input
+          value={dataInput}
+          onInput={onchange}
           type="text"
           {...register('input', { required: 'Please Enter Na' })}
           className="input"

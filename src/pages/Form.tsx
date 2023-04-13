@@ -11,6 +11,9 @@ import {
   MyInputRadio,
   MyInputCheckbox,
 } from '../components/Formcomponent';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'store/store';
+import { addForm } from '../store/redusers/reduserform';
 export interface CustomElementType {
   id: string;
   name: string | undefined;
@@ -21,7 +24,7 @@ export interface CustomElementType {
   radio: string;
 }
 const arrCards: CustomElementType[] = [];
-const preparationArr = (data: FieldValues): CustomElementType[] => {
+const preparationArr = (data: FieldValues): CustomElementType => {
   const photoFile =
     data.photo?.length !== 0 && data.photo ? URL.createObjectURL(data.photo[0]) : '';
   const dataCard = {
@@ -34,7 +37,7 @@ const preparationArr = (data: FieldValues): CustomElementType[] => {
     radio: data.contactChoice,
   };
   arrCards.push(dataCard);
-  return arrCards;
+  return dataCard;
 };
 function showMessage(callback: (arg: string) => void) {
   callback('CARD CREATED');
@@ -53,12 +56,12 @@ function Form() {
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
-  const [arr, setCards] = React.useState<CustomElementType[]>([]);
   const [mess, setMess] = React.useState('');
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = (data: FieldValues): void => {
-    setCards(preparationArr(data));
     showMessage(setMess);
+    dispatch(addForm(preparationArr(data)));
     reset();
   };
   return (
@@ -77,7 +80,7 @@ function Form() {
             Submit
           </button>
         </form>
-        <Listform elem={arr} />
+        <Listform />
       </div>
     </>
   );

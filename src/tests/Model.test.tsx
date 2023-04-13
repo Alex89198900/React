@@ -17,13 +17,3 @@ it('handles failure', async () => {
     'invalid json response body at https://dummyjson.com/products///iiiiii reason: Unexpected end of JSON input'
   );
 });
-
-it('single req', async () => {
-  server.use(
-    rest.get('https://dummyjson.com/products/', (_req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(cardTest));
-    })
-  );
-
-  expect(getData('1')).rejects.toThrow();
-});

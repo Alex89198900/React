@@ -1,13 +1,12 @@
+import { useAppSelector } from '../hooks/redux';
 import React from 'react';
+import { RootState } from 'store/store';
 import { CustomElementType } from '../pages/Form';
 import Formrender from './Formrender';
 
-interface CardForm {
-  elem: Array<CustomElementType>;
-}
-
-function Listform(props: CardForm) {
-  const listItems = props.elem.map((el: CustomElementType) => (
+function Listform() {
+  const { form } = useAppSelector((state: RootState) => state);
+  const listItems = form.map((el: CustomElementType) => (
     <li key={el.id} className="item-form">
       <Formrender num={el} />
     </li>
