@@ -3,11 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { HashRouter } from 'react-router-dom';
 import Form from '../pages/Form';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
 describe('Form', () => {
   const setup = () => {
     render(
       <HashRouter>
-        <Form />
+        <Provider store={store}>
+          <Form />
+        </Provider>
       </HashRouter>
     );
   };

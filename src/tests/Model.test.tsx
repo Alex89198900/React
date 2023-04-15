@@ -1,6 +1,6 @@
 import { getData } from '../model';
 import { server, rest } from '../testServer';
-import { elem, cardTest } from './datatest';
+import { elem } from './datatest';
 it('converts correctly', async () => {
   const rate = await getData('');
   expect(rate).toEqual({ elem });

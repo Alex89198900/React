@@ -20,10 +20,8 @@ export async function getData(param = '') {
   return data;
 }
 
-export async function setData(callback: (arg: CardType[]) => void, param = ''): Promise<void> {
-  const paramFilt = await filterData(param);
-  const res = await getData(paramFilt);
-  callback(res.products ?? []);
+export async function SetData(callback: (arg: CardType[]) => void, param = ''): Promise<void> {
+  //const [getUsers, results] = useLazyGetStoreDataQuery();
 }
 export async function setStupidData(
   callback: (arg: CardType[]) => void,
@@ -33,10 +31,8 @@ export async function setStupidData(
   callback([res]);
 }
 export async function filterData(cof: string) {
-  const arrProd = await getData();
-  const arrrrr = arrProd.products ?? [];
   let hostPar = 'search?q=smartphones565656566565656';
-  arrrrr.forEach((el: CardType) => {
+  [].forEach((el: CardType) => {
     if (el.category.toLocaleLowerCase() === cof.toLocaleLowerCase()) {
       hostPar = `category/${cof.toLocaleLowerCase()}`;
     } else if (el.title.toLocaleLowerCase().includes(cof.toLocaleLowerCase())) {

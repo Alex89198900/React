@@ -2,21 +2,31 @@ import React, { useEffect } from 'react';
 import { CardType } from '../model';
 import List from '../components/List';
 import Header from '../components/Header';
-import { setData } from '../model';
 import { FieldValues, useForm } from 'react-hook-form';
 import Sppiner from '../components/Spinner';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { incrementByAmount } from '../store/redusers/searchreduser';
+import { RootState } from 'store/store';
+import { useLazyGetStoreDataQuery } from '../store/redusers/apireduser';
 type FormInputs = {
   input?: string;
 };
 
+function searchData(callback: (arg: string) => void, param = '') {
+  if (param !== '') {
+    callback(`search?q=${param}`);
+  } else {
+    callback(param);
+  }
+}
+
 function Main() {
   const [arr, setCards] = React.useState<CardType[]>([]);
   const [paramFil, setparamFil] = React.useState('');
-  const [flagFind, setflagFind] = React.useState(false);
-  const dataInput = useAppSelector((state) => state.input.value);
+  const [fetchTrigger, { data, isLoading }] = useLazyGetStoreDataQuery({});
+  const dataInput = useAppSelector((state: RootState) => state.input.value);
   const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -27,43 +37,43 @@ function Main() {
     reValidateMode: 'onSubmit',
   });
   const onSubmit = (data: FieldValues): void => {
-    setparamFil(data.input);
+    searchData(setparamFil, data.input);
+    dispatch(incrementByAmount(''));
     reset();
   };
-
   useEffect(() => {
-    setflagFind(false);
     async function fetchData() {
-      await setData(setCards, paramFil);
-      setflagFind(true);
+      fetchTrigger(paramFil);
+      if (data) {
+        setCards(data?.products);
+      }
     }
     fetchData();
-  }, [paramFil]);
+  }, [data, fetchTrigger, paramFil]);
 
   const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
     dispatch(incrementByAmount(e.currentTarget.value));
   };
-
   return (
     <div className="main">
       <h1>Main</h1>
       <Header title="Main" />
-      {flagFind === false && <Sppiner />}
+      {isLoading && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
         <input
           value={dataInput}
           onInput={onchange}
           type="text"
-          {...register('input', { required: 'Please Enter Na' })}
+          {...register('input')}
           className="input"
-          placeholder="search by category and name product"
         />
         <button type="submit" className="submit">
           Submit
         </button>
       </form>
-      <List elem={arr} find={flagFind} />
+      <List elem={arr} isLoading={isLoading} />
     </div>
   );
 }
+
 export default Main;

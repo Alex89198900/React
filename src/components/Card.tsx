@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import Modal from './Modal';
-import { CardType, setStupidData } from '../model';
+import { CardType } from '../model';
 import Sppiner from './Spinner';
+import { useLazyGetStoreDataQuery } from '../store/redusers/apireduser';
 export interface Product {
   num: {
     id: number;
@@ -21,21 +22,33 @@ export interface Product {
 function Card(props: Product) {
   const [num, setNum] = React.useState<CardType[]>([]);
   const [paramSpin, setparamSpin] = React.useState(false);
+  const [fetchTrigger, { data, isLoading }] = useLazyGetStoreDataQuery();
   const idToModal = String(props.num.id);
   const ref = useRef(null);
   function modalOff() {
     setNum([]);
-    setparamSpin(false);
   }
+
   const handleClickOutside = () => {
     setNum([]);
-    setparamSpin(false);
   };
 
   const handleClickInside = () => {
-    setStupidData(setNum, idToModal);
+    setparamSpin(true);
+    if (data) {
+    }
     setparamSpin(true);
   };
+  useEffect(() => {
+    async function fetchData() {
+      if (paramSpin) fetchTrigger(idToModal);
+      if (data) {
+        setNum([data]);
+      }
+    }
+    setparamSpin(false);
+    fetchData();
+  }, [data, fetchTrigger, idToModal, paramSpin]);
 
   useOnClickOutside(ref, handleClickOutside);
 
@@ -53,7 +66,7 @@ function Card(props: Product) {
             <Modal elem1={num} />
           </div>
         </div>
-        {num.length === 0 && paramSpin === true && <Sppiner />}
+        {isLoading && <Sppiner />}
         <div>
           <img src={`${props.num.thumbnail}`} className="img-card"></img>
           <h3 className="title-card">{props.num.title}</h3>
