@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { incrementByAmount } from '../store/redusers/searchreduser';
 import { RootState } from 'store/store';
 import { useLazyGetStoreDataQuery } from '../store/redusers/apireduser';
+import { incrementByAmountM } from '../store/redusers/searchmemory';
 type FormInputs = {
   input?: string;
 };
@@ -25,6 +26,7 @@ function Main() {
   const [paramFil, setparamFil] = React.useState('');
   const [fetchTrigger, { data, isLoading }] = useLazyGetStoreDataQuery({});
   const dataInput = useAppSelector((state: RootState) => state.input.value);
+  const dataInput2 = useAppSelector((state: RootState) => state.inputm.value);
   const dispatch = useAppDispatch();
 
   const {
@@ -40,6 +42,7 @@ function Main() {
     setparamFil(dataInput);
     searchData(setparamFil, data.input);
     dispatch(incrementByAmount(data.input));
+    dispatch(incrementByAmountM(''));
     reset();
   };
   useEffect(() => {
@@ -53,16 +56,22 @@ function Main() {
     fetchData();
   }, [data, dataInput, fetchTrigger, paramFil]);
 
-  // const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
-  //   dispatch(incrementByAmount(e.currentTarget.value));
-  // };
+  const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
+    dispatch(incrementByAmountM(e.currentTarget.value));
+  };
   return (
     <div className="main">
       <h1>Main</h1>
       <Header title="Main" />
       {isLoading && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
-        <input type="text" {...register('input')} className="input" />
+        <input
+          type="text"
+          {...register('input')}
+          className="input"
+          value={dataInput2}
+          onInput={onchange}
+        />
         <button type="submit" className="submit">
           Submit
         </button>
