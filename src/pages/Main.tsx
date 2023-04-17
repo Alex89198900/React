@@ -37,36 +37,32 @@ function Main() {
     reValidateMode: 'onSubmit',
   });
   const onSubmit = (data: FieldValues): void => {
+    setparamFil(dataInput);
     searchData(setparamFil, data.input);
-    dispatch(incrementByAmount(''));
+    dispatch(incrementByAmount(data.input));
     reset();
   };
   useEffect(() => {
     async function fetchData() {
+      searchData(setparamFil, dataInput);
       fetchTrigger(paramFil);
       if (data) {
         setCards(data?.products);
       }
     }
     fetchData();
-  }, [data, fetchTrigger, paramFil]);
+  }, [data, dataInput, fetchTrigger, paramFil]);
 
-  const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
-    dispatch(incrementByAmount(e.currentTarget.value));
-  };
+  // const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
+  //   dispatch(incrementByAmount(e.currentTarget.value));
+  // };
   return (
     <div className="main">
       <h1>Main</h1>
       <Header title="Main" />
       {isLoading && <Sppiner />}
       <form onSubmit={handleSubmit(onSubmit)} className="catalin">
-        <input
-          value={dataInput}
-          onInput={onchange}
-          type="text"
-          {...register('input')}
-          className="input"
-        />
+        <input type="text" {...register('input')} className="input" />
         <button type="submit" className="submit">
           Submit
         </button>
