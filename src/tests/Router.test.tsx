@@ -3,7 +3,9 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import Routeses from '../components/Router';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import setupStore from '../store/store';
+const store = setupStore({});
+
 describe('Header', () => {
   it('Route about', () => {
     render(

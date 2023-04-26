@@ -4,7 +4,9 @@ import { HashRouter } from 'react-router-dom';
 import Form from '../pages/Form';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import setupStore from '../store/store';
+const store = setupStore({});
+
 describe('Form', () => {
   const setup = () => {
     render(

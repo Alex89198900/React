@@ -1,10 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
+
+const contStyle = {
+  color: 'red',
+};
 function About() {
   return (
     <div className="about">
-      <Header title="About us" />
-      <h1>About page</h1>
+      <Header title="about" />
+      <h1 style={contStyle} className="title-about">
+        About page
+      </h1>
     </div>
   );
 }

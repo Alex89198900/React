@@ -9,6 +9,7 @@ import { incrementByAmount } from '../store/redusers/searchreduser';
 import { RootState } from 'store/store';
 import { useLazyGetStoreDataQuery } from '../store/redusers/apireduser';
 import { incrementByAmountM } from '../store/redusers/searchmemory';
+import { setSearch } from '../store/redusers/ssr-reduser';
 type FormInputs = {
   input?: string;
 };
@@ -28,7 +29,7 @@ function Main() {
   const dataInput = useAppSelector((state: RootState) => state.input.value);
   const dataInput2 = useAppSelector((state: RootState) => state.inputm.value);
   const dispatch = useAppDispatch();
-
+  const initialProd = useAppSelector((state) => state.inputmemory.initProd);
   const {
     register,
     handleSubmit,
@@ -43,18 +44,20 @@ function Main() {
     searchData(setparamFil, data.input);
     dispatch(incrementByAmount(data.input));
     dispatch(incrementByAmountM(''));
+    dispatch(setSearch(paramFil));
     reset();
   };
   useEffect(() => {
     async function fetchData() {
       searchData(setparamFil, dataInput);
       fetchTrigger(paramFil);
+      dispatch(setSearch(paramFil));
       if (data) {
         setCards(data?.products);
       }
     }
     fetchData();
-  }, [data, dataInput, fetchTrigger, paramFil]);
+  }, [data, dataInput, dispatch, fetchTrigger, paramFil]);
 
   const onchange = (e: React.FormEvent<HTMLInputElement>): void => {
     dispatch(incrementByAmountM(e.currentTarget.value));
@@ -76,7 +79,7 @@ function Main() {
           Submit
         </button>
       </form>
-      <List elem={arr} isLoading={isLoading} />
+      <List elem={initialProd.products || [] || arr} isLoading={isLoading} />
     </div>
   );
 }

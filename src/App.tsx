@@ -1,17 +1,27 @@
-import './App.scss';
+import { PreloadedState } from '@reduxjs/toolkit';
 import React from 'react';
-import Routeses from './components/Router';
-import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import { Router } from './router';
+import setupStore, { RootState } from './store/store';
+
+declare global {
+  interface Window {
+    __PRELOADED_STATE__?: PreloadedState<RootState>;
+  }
+}
+
+const store = setupStore(window.__PRELOADED_STATE__);
+delete window.__PRELOADED_STATE__;
 
 function App() {
   return (
-    <div className="app">
-      <div>
-        <HashRouter>
-          <Routeses />
-        </HashRouter>
-      </div>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
