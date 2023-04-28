@@ -1,4 +1,4 @@
-describe('Layout', () => {
+describe('renders', () => {
   it('Layout should contain wrapper and main sections', () => {
     cy.visit('/');
     cy.get('main').should('be.visible');
@@ -8,9 +8,4 @@ describe('Layout', () => {
     cy.visit('/about');
     cy.contains(/about page/i).should('be.visible');
   });
-
-  // it('Footer should have link with year 2023', () => {
-  //   cy.visit('/');
-  //   cy.contains('With ❤️ from').should('include.text', '2023');
-  // });
 });

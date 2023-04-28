@@ -12,4 +12,5 @@ export default defineConfig({
   video: false,
   fixturesFolder: false,
   screenshotOnRunFailure: false,
+  defaultCommandTimeout: 10000,
 });

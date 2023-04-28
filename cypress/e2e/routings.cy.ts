@@ -1,4 +1,4 @@
-describe('Navigation', () => {
+describe('routings', () => {
   it('should correctly redirect on all routes', () => {
     cy.visit('/');
     cy.get('.main').should('have.length', 2);
