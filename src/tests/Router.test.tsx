@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Routeses from '../components/Router';
+import { Router } from '../router';
 import { Provider } from 'react-redux';
 import setupStore from '../store/store';
 const store = setupStore({});
@@ -11,7 +11,7 @@ describe('Header', () => {
     render(
       <MemoryRouter initialEntries={['/about']}>
         <Provider store={store}>
-          <Routeses />
+          <Router />
         </Provider>
       </MemoryRouter>
     );
@@ -21,7 +21,7 @@ describe('Header', () => {
     render(
       <MemoryRouter initialEntries={['/jjjjfjfj']}>
         <Provider store={store}>
-          <Routeses />
+          <Router />
         </Provider>
       </MemoryRouter>
     );

@@ -1,5 +1,5 @@
 describe('routings', () => {
-  it('should correctly redirect on all routes', () => {
+  it('correctly routes', () => {
     cy.visit('/');
     cy.get('.main').should('have.length', 2);
 
@@ -12,7 +12,7 @@ describe('routings', () => {
     cy.contains('Submit').should('be.visible');
   });
 
-  it('should render 404 if path is invalid', () => {
+  it('404', () => {
     cy.visit('/ab0ut');
     cy.contains(/ops 404/i).should('be.visible');
   });

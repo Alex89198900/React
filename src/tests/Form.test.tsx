@@ -34,4 +34,81 @@ describe('Form', () => {
     await user.type(input2, '2023-03-26');
     expect(input2).toHaveValue('2023-03-26');
   });
+  // it('should validate name input if it is empty', async () => {
+  //   render(
+  //     <HashRouter>
+  //       <Provider store={store}>
+  //         <Form />
+  //       </Provider>
+  //     </HashRouter>
+  //   );
+  //   const submitButton = screen.getByRole('button', { name: /submit/i });
+  //   await userEvent.click(submitButton);
+  //   expect(screen.getByText(/'choise photo'/i)).toBeInTheDocument();
+  // });
+
+  it('should validate name input if it value starts from lowercase', async () => {
+    render(
+      <HashRouter>
+        <Provider store={store}>
+          <Form />
+        </Provider>
+      </HashRouter>
+    );
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    await userEvent.click(submitButton);
+    expect(screen.getByText(/please Enter Name/i)).toBeInTheDocument();
+  });
+
+  //   it('should validate date input if it is empty', async () => {
+  //     render(
+  //       <HashRouter>
+  //         <Provider store={store}>
+  //           <Form />
+  //         </Provider>
+  //       </HashRouter>
+  //     );
+  //     const submitButton = screen.getByRole('button', { name: /submit/i });
+  //     await userEvent.click(submitButton);
+  //     expect(screen.getByText(/provide your birthday/i)).toBeInTheDocument();
+  //   });
+
+  //   it('should validate file input if it is empty', async () => {
+  //     render(
+  //       <HashRouter>
+  //         <Provider store={store}>
+  //           <Form />
+  //         </Provider>
+  //       </HashRouter>
+  //     );
+  //     const submitButton = screen.getByRole('button', { name: /submit/i });
+  //     await userEvent.click(submitButton);
+  //     expect(screen.getByText(/choose a file/i)).toBeInTheDocument();
+  //   });
+
+  //   it('should validate country input if it is empty', async () => {
+  //     render(
+  //       <HashRouter>
+  //         <Provider store={store}>
+  //           <Form />
+  //         </Provider>
+  //       </HashRouter>
+  //     );
+  //     const submitButton = screen.getByRole('button', { name: /submit/i });
+  //     await userEvent.click(submitButton);
+  //     expect(screen.getByText('Choose a country')).toBeInTheDocument();
+  //   });
+
+  //   it('should validate gender input if it is empty', async () => {
+  //     render(
+  //       <HashRouter>
+  //         <Provider store={store}>
+  //           <Form />
+  //         </Provider>
+  //       </HashRouter>
+  //     );
+  //     const submitButton = screen.getByRole('button', { name: /submit/i });
+  //     await userEvent.click(submitButton);
+  //     expect(screen.getByText(/choose a gender/i)).toBeInTheDocument();
+  //   });
 });
