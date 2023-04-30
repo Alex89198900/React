@@ -9,8 +9,7 @@
     "check-types": "tsc --noEmit",
     "eslint": "eslint . --ext .tsx --ext .ts",
     "lint": "npm run check-types && npm run eslint",
-    "test:e2e": "start-server-and-test dev http://localhost:3333 cypress",
-    "test2": "start-server-and-test dev http://localhost:3333 cypress && npx nyc report --reporter=text-summary",
+    "test:e2e": "start-server-and-test dev http://localhost:3333 cypress && npx nyc report --reporter=text-summary",
     "cypress": "cypress run --e2e",
     "make:redirects": "echo /* /index.html 200 > dist/_redirects"
   },

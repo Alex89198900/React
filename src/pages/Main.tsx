@@ -43,7 +43,6 @@ function Main() {
     setparamFil(dataInput);
     searchData(setparamFil, data.input);
     dispatch(incrementByAmount(data.input));
-    dispatch(incrementByAmountM(''));
     dispatch(setSearch(paramFil));
     reset();
   };

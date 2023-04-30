@@ -9,20 +9,20 @@ import { Request } from 'express';
 import { storeApi } from './store/redusers/apireduser';
 
 const store = setupStore({});
-interface AssetMap {
+interface EntryClient {
   style?: string;
   script: string;
 }
 
 async function render(
   req: Request,
-  assetMap: AssetMap,
+  entryClient: EntryClient,
   opts: ReactDOMServer.RenderToPipeableStreamOptions | undefined
 ) {
   await store.dispatch(storeApi.endpoints.getStoreData.initiate(''));
   const preloadedState = store.getState();
   return renderToPipeableStream(
-    <HTMLtoserver style={assetMap.style} preload={preloadedState}>
+    <HTMLtoserver style={entryClient.style} preload={preloadedState}>
       <Provider store={store}>
         <StaticRouter location={req.originalUrl}>
           <Router />
