@@ -1,5 +1,4 @@
 import * as rtkQuery from '@reduxjs/toolkit/dist/query/react/index.js';
-//import { buildCreateApi, coreModule, reactHooksModule } from '@reduxjs/toolkit/query/react';
 
 type TypeRtkQuery = typeof rtkQuery & { default?: unknown };
 const { buildCreateApi, coreModule, reactHooksModule } = ((rtkQuery as TypeRtkQuery).default ??
